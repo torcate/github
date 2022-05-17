@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Parte 02 - Automatização com o GitHub</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Fernando da Silva Data Scientist       " />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#282f6b"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="libs/mark.js/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copiar","success":"Copiado!","error":"Pressione Ctrl+C para copiar"})</script>
+    <script src="libs/xaringanExtra-progressBar/progress-bar.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Parte 02 - Automatização com o GitHub
+### Fernando da Silva<br><span style="font-size: 70%;">Data Scientist<br><a href="https://github.com/schoulten"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="rfa" style="height:0.75em;fill:#282f6b;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a>  <a href="https://www.linkedin.com/in/schoulten/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="rfa" style="height:0.75em;fill:#282f6b;position:relative;"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>  <a href="mailto:fernando@fortietwo.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="rfa" style="height:0.75em;fill:#282f6b;position:relative;"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg></a>  <a href="https://analisemacro.com.br/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="rfa" style="height:0.75em;fill:#282f6b;position:relative;"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg></a></span>
+### <span style="font-size: 70%;">17 de maio de 2022</span>
+
+---
+
+
+
+
+
+&lt;style type="text/css"&gt;
+pre {
+  white-space: pre-wrap;
+  overflow-y: scroll !important;
+  max-height: 45vh !important;
+  overflow-x: auto;
+  max-width: 100%;
+}
+&lt;/style&gt;
+
+
+
+### Temas de hoje
+
+- Repositório local (Git)&lt;br&gt;&lt;br&gt;
+- Repositório remoto (GitHub)&lt;br&gt;&lt;br&gt;
+- Workflow com o GitHub Actions&lt;br&gt;&lt;br&gt;
+- GitHub Pages
+
+
+---
+### Introdução
+
+Este é um tutorial para automatizar uma rotina de modelagem e previsão, tomando como exemplo o modelo do IPCA. Ao final, teremos uma infraestrutura que permitirá:
+
+1. Estimação e previsão com os modelos em uma periodicidade mensal;
+2. Atualização da dashboard de resultados;
+3. Hospedagem da dashboard e acesso por link de navegação.
+
+Você pode conferir o resultado final do tutorial [neste link da dashboard]() e [neste link do repositório no GitHub]().
+
+Partiremos do que já foi exposto previamente no curso, ou seja, do código para implementar os modelos e a dashboard de resultados. O foco do tutorial será colocar esse código do modelo de previsão do IPCA em uma infraestrutura que permite automatizar a rotina.
+
+
+---
+class: middle, inverse, center
+# Repositório local (Git)
+
+
+---
+### O projeto
+
+O primeiro passo é ter um projeto de RStudio&lt;sup&gt;1&lt;/sup&gt; com o código de R contendo as rotinas do modelo de previsão. Este projeto deve seguir a estrutura de projetos de R, seguindo uma organização e boas práticas. 
+
+.pull-left[
+
+Em resumo, o projeto deve conter:
+
+- Um arquivo de projeto `.Rproj` na raiz;
+- Uma pasta R com o(s) script(s) do modelo;
+- Um arquivo de dashboard (`.Rmd`) a ser renderizada;
+- Demais arquivos e pastas necessários na rotina do modelo.
+
+]
+
+.pull-right[
+
+No caso do modelo de previsão do IPCA, o projeto apresenta a seguinte estrutura:
+
+
+```
+# ../ipca
+# +-- docs
+# |   +-- dash_ipca.Rmd
+# |   \-- index.html
+# +-- ipca.Rproj
+# +-- metadados
+# |   \-- metadados.csv
+# \-- R
+#     \-- dashboard.R
+```
+
+]
+
+.footnote[
+
+&lt;sup&gt;1&lt;/sup&gt; Já vimos como criar um projeto na parte 01 desta aula.
+
+]
+
+
+---
+### Criando o repositório local
+
+O segundo passo é transformar a estrutura de arquivos do projeto em uma estrutura de repositório Git. Em resumo, o Git é um software para versionamento de arquivos, muito importante e utilizado em projetos de ciência de dados. Com ele, evitamos adotar a má prática de desenvolver códigos criando arquivos para cada versão como `script_v1.R`, `script_v2.R`, `script_final.R`, etc., o que acada sendo caótico no final. O Git faz esse gerenciamento de maneira mais inteligente.
+
+Para saber mais sobre Git e GitHub recomendamos o livro [Happy Git and GitHub for the useR](https://happygitwithr.com/index.html) de Jennifer Bryan, escrito para usuários do R.
+
+Na prática, o que você deve fazer é:
+
+1. Instalar o Git (veja como: [https://happygitwithr.com/install-git.html#install-git](https://happygitwithr.com/install-git.html#install-git));
+2. Configurar o Git conforme o comando abaixo no Console do RStudio (coloque seu nome e email que serão os mesmos da sua conta GitHub):
+
+```r
+library(usethis)
+use_git_config(user.name = "Fernando da Silva", user.email = "fernando@fortietwo.com")
+```
+
+Veja detalhes sobre essa etapa em: [https://happygitwithr.com/hello-git.html#hello-git](https://happygitwithr.com/hello-git.html#hello-git)
+
+
+---
+### Criando o repositório local
+
+Com o Git instalado e configurado, podemos prosseguir então com a criação do repositório local:
+
+1. Abra o projeto de RStudio (se já não estiver aberto);
+2. No Console execute o seguinte comando:
+
+```r
+usethis::use_git()
+```
+
+Aparecerá uma mensagem interativa no Console perguntando se você quer registrar com um *commit* os arquivos já existentes no projeto (*Is it ok to commit them?*), digite o número correspondente à opção positiva e aperte Enter para confirmar o registro.
+
+Em seguida, aparecerá outra mensagem perguntando se você deseja reinicializar o RStudio para ativar o painel do Git no mesmo (*A restart of RStudio is required to activate the Git pane. Restart now?*). Novamente, confirme com o número correspondente e aguarde a reinicialização.
+
+Pronto, esta etapa foi concluída.
+
+
+---
+class: middle, inverse, center
+# Repositório remoto (GitHub)
+
+
+---
+### Conectando RStudio, Git e GitHub
+
+Agora utilizaremos este repositório local do nosso modelo de previsão do IPCA e armazenaremos uma cópia dele em um repositório remoto, ou seja, no GitHub. Essa plataforma é muito utilizada para desenvolvimento de projetos e de softwares, além de ter recursos interessantes para automatizar rotinas, conforme veremos adiante.
+
+Na prática, o que você deve fazer é (veja com mais detalhes [neste link](https://analisemacro.com.br/data-science/conectando-git-github-e-rstudio-em-3-passos/)):
+
+1. Ter uma conta de usuário no GitHub (há opção gratuita, não precisa ser a conta paga) com mesmo email utilizado no procedimento anterior. Caso ainda não tenha uma, crie através [deste link](https://github.com/signup?ref_cta=Sign+up&amp;ref_loc=header+logged+out&amp;ref_page=%2F&amp;source=header-home);
+2. Criar um token do GitHub&lt;sup&gt;2&lt;/sup&gt;, que pode ser feito através do comando abaixo Console do RStudio:
+
+```r
+usethis::create_github_token()
+```
+
+Será aberta uma página do GitHub onde você pode colocar, opcionalmente, um nome para o token no campo *Note*, uma data de expiração e selecionar escopos desejados (recomenda-se manter *repo, user* e *workflow*). Ao final clique em *Generate token* e copie o código do token gerado (ao fechar a página não será possível visualizá-lo novamente), de preferência salvando a informação em local seguro.
+
+
+.footnote[
+
+&lt;sup&gt;2&lt;/sup&gt; Para a interação entre seu computador (mais especificamente o repositório Git local) e o GitHub (repositório remoto) funcionar é preciso de uma autenticação, certificando que você tem as permissões necessárias para fazer o que quer que seja. Essa autenticação pode ser facilmente implementada através da configuração de um token (também conhecido como PAT) do GitHub.
+
+]
+
+
+---
+### Conectando RStudio, Git e GitHub
+
+Com o token em mãos, use o pacote `{gitcreds}` para armazenar o token no *Git credential store*, que é algo parecido como um arquivo de "cache" de algum site ou botão "lembrar senha" que é usado toda vez que você fizer interações entre o repositório local e o remoto.
+
+Após executar o comando abaixo, cole o token obtido anteriormente:
+
+```r
+gitcreds::gitcreds_set()
+```
+
+Por fim, se deu tudo certo até aqui, você estará habilitado a criar o repositório remoto no GitHub, que pode ser feito através do comando&lt;sup&gt;3&lt;/sup&gt; abaixo:
+
+```r
+usethis::use_github()
+```
+
+Ao final será aberto uma janela no seu navegador com o link para o repositório na sua conta. O nome do repositório será o nome dado ao seu projeto de RStudio.
+
+
+.footnote[
+
+&lt;sup&gt;3&lt;/sup&gt; Por padrão será criado um repositório público, com livre acesso de outras pessoas, mas você pode usar o argumento `private = TRUE` para criar um repositório privado (somente você, e quem você permitir, pode acessar).
+
+]
+
+
+---
+class: middle, inverse, center
+# Workflow com o GitHub Actions
+
+
+---
+### Gerenciamento de dependências: `{renv}`
+
+Antes de prosseguirmos para a automatização do nosso código usando o GitHub Actions, precisamos nos ater ao gerenciamento de versões de pacotes utilizadas no projeto. Quando executamos um mesmo código em um outro computador (na prática estaremos fazendo isso), se o mesmo tiver versões de pacotes diferentes das usadas no seu computador, há grandes chances de acontecer erros, pois os comportamentos das funções podem mudar conforme a versão do pacote. Para resolver esse possível problema utilizaremos o `{renv}` que gerenciará, através da fixação das versões, os pacotes que o projeto necessita. Na prática, tudo que você precisa fazer é executar no Console do RStudio o seguinte comando (veja mais detalhes sobre isso [nest link](https://analisemacro.com.br/data-science/por-que-e-como-criar-environments-locais-no-r/)):
+
+```r
+options(repos = c(CRAN = "https://cloud.r-project.org/")) # utiliza CRAN como fonte dos pacotes
+renv::init() # configura infra do renv
+```
+
+Aguarde todos os procedimentos do `{renv}` serem executados e no final, após reiniciar a sessão do RStudio, verifique se deu tudo certo com o comando:
+
+```r
+renv::status()
+```
+
+Se houver mensagens diferentes de "*The project is already synchronized with the lockfile.*", verifique com atenção o que está pendente para poder solucionar. Pode ser que algum pacote (como o `{HDeconometrics}`) apresente falha de instalação, nesse caso tente instalar manualmente e verifique o status para poder prosseguir.
+
+
+---
+### Registrando (*commit* e *push*) as alterações
+
+Sempre que você fizer alguma alteração no projeto, como acabamos de fazer adicionando a infraestrutura do `{renv}`, é importante registrar isso no "histórico" do repositório. Isso é feito através do que é chamado de *commit* e *push*.
+
+Na prática, o que você deve fazer é:
+
+1. No painel Git do RStudio, clicar no botão *Commit*;
+2. No lado esquerdo da tela que se abre, marcar os arquivos que aparecem com o status *Untracked* através da caixa de seleção (o status deve mudar para *Added*);
+3. No lado direito da tela, em *Commit message*, descreva brevemente a alteração realizada (pode ser algo como "Adicionado o gerenciamento de dependências (renv)")
+4. Finalize a operação clicando no botão *Commit* e fechando a tela.
+
+Após isso, clique no botão *Push* do painel Git no RStudio para enviar essas alterações registradas localmente para o repositório remoto (GitHub). Caso você obtenha algum problema nessa etapa, como o pedido de senha/token, veja como resolver através [deste link](https://happygitwithr.com/https-pat.html#pat-troubleshooting).
+
+
+---
+### Arquivo YAML de workflow
+
+Agora iremos criar um arquivo de extensão `.yaml` que servirá para dar instruções ao GitHub sobre o que ele deve fazer e quando fazer. Em outras palavras, estamos dizendo ao computador do GitHub o passo a passo que ele vai executar todo dia 15 de cada mês para automatizar o nosso modelo/dashboard. Uma vez feito isso, eliminamos qualquer trabalho manual (exceto algum ajuste ou atualização que você queira fazer no modelo).
+
+Na prática, o que você deve fazer é:
+
+1. Crie uma pasta na raiz do projeto nomeada ".github";
+2. Cria uma subpasta nomeada "workflows";
+3. No RStudio, clique em `File &gt; New File &gt; Text File` para criar um arquivo em branco;
+4. Cole todo o conteúdo do chunk do próximo slide no arquivo criado;
+5. Salve o arquivo com um nome (pode ser `update.yaml`) na subpasta criada.
+
+**Importante**: a indentação em cada linha é fundamental para o correto funcionamento. Se houver dúvida verifique o arquivo diretamente na fonte, disponibilizado no material de aula.
+
+
+---
+### Arquivo YAML de workflow
+
+```yaml
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  push:
+    branches: [main, master]
+  schedule:
+    - cron: "0 0 15 * *"
+
+name: Model update
+
+jobs:
+  model-update:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RENV_PATHS_ROOT: ~/.local/share/renv
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install curl
+        run: sudo apt -y install libcurl4-openssl-dev
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Restore packages
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+        shell: Rscript {0}
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Update model and knit dashboard
+        run: |
+          source("R/dashboard.R")
+        shell: Rscript {0}
+
+      - name: Commit results
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add .
+          git commit -m "Update model and dashboard" || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
+```
+
+
+---
+### Entendendo o workflow
+
+Antes de prosseguir, vale entender de forma resumida do que se trata o conteúdo inserido no arquivo YAML. Vamos por partes, das linhas 3 a 7 temos:
+
+```yaml
+on:
+  push:
+    branches: [main, master]
+  schedule:
+    - cron: "0 0 15 * *"
+```
+
+- `on` define quais eventos devem executar o workflow
+- `push` quando houver um *commit* e *push* no repositório sendo direcionado à branch abaixo
+- `schedule` ou conforme um agendamento temporal, nesse caso, todo dia 15 do mês às 00:00 UTC (veja exemplos em [crontab guru](https://crontab.guru/examples.html))
+
+Em outras palavras, a rotina do modelo de previsão do IPCA será executada cada vez que alterarmos algo no repositório e fizermos um *push* ou todo dia 15 de cada mês.
+
+
+---
+### Entendendo o workflow
+
+Prosseguindo, nas linhas 11 a 16:
+
+```yaml
+name: Model update
+
+jobs:
+  model-update:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RENV_PATHS_ROOT: ~/.local/share/renv
+```
+
+- `name` define o nome do workflow
+- `jobs` indica que a partir desta linha listaremos os trabalhos a serem executados (podem ser vários)
+- `model-update` nome do trabalho
+- `runs-on` define o sistema operacional utilizado no workflow (Linux é preferível e mais econômico)
+- `env` define variáveis de ambiente, sendo `GITHUB_PAT` a habilitação do token do teu repositório com um aplicativo do GitHub instalado no mesmo e `RENV_PATHS_ROOT` o caminho para a pasta de cache do sitema operacional, conforme [este link](https://rstudio.github.io/renv/reference/paths.html), útil para o `{renv}` salvar instalações de pacotes e otimizar execuções futuras
+
+
+---
+### Entendendo o workflow
+
+Prosseguindo, nas linhas 17 a 25:
+
+```yaml
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install curl
+        run: sudo apt -y install libcurl4-openssl-dev
+```
+
+- `steps` define quais passos devem ser executados nesse trabalho
+- `uses: actions/checkout@v2` serve para o workflow acessar (clonar) seu repositório temporariamente, podendo assim executar demais steps do trabalho
+- `uses: r-lib/actions/setup-r@v2` realiza o setup de um ambiente de programação com o R
+- `name: Install curl` define o nome do step e `run` informa o código a ser executado no Terminal do sistema operacional (nesse caso a instalação de um software, curl, que é uma dependência de um pacote de R usado no código do modelo)
+
+
+---
+### Entendendo o workflow
+
+Prosseguindo, nas linhas 27 a 38:
+
+```yaml
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Restore packages
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+        shell: Rscript {0}
+```
+
+- `uses: actions/cache@v2` é um step do prório GitHub para criar cache das dependências do workflow e otimizar o tempo de execução futura
+- `with` são as entradas que o step requer que sejam definidas, sendo as expressões abaixo (em `path`, `key` e `restore-keys`) provenientes do próprio `{renv}`
+- `shell` serve para definir que o step em questão, com código definido em `run`, seja executado em um ambiente de R (nesse caso será executado `renv::restore()` para restaurar os pacotes utilizados)
+
+
+---
+### Entendendo o workflow
+
+Prosseguindo, nas linhas 40 a 45:
+
+```yaml
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Update model and knit dashboard
+        run: |
+          source("R/dashboard.R")
+        shell: Rscript {0}
+```
+
+- `uses: r-lib/actions/setup-pandoc@v2` é um step para realizar o setup do pandoc, necessário para renderizar o documento R Markdown
+- `name: Update model and knit dashboard` é o nome do step que executa o código do modelo de previsão do IPCA e de renderização da dashboard, armazenado em `R/dashboard.R` e que pode ser chamado com a função `source()`
+
+
+---
+### Entendendo o workflow
+
+Por fim, nas linhas 47 a 53:
+
+```yaml
+      - name: Commit results
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add .
+          git commit -m "Update data and deploy shiny app" || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
+```
+
+- `name: Commit results` é o nome do step que realiza o *commit* e *push* das alterações realizadas, se houverem, pelo workflow no repositório, através de comandos do Git
+
+
+---
+### GitHub Actions
+
+Agora basta realizar o registro dessas alterações no repositório local (arquivo `.yaml` adicionado) e enviar para repositório remoto (*commit* e *push*), conforme já exemplificado. Uma vez que você tenha feito isso, será possível acompanhar o workflow enquanto é executado na aba *Actions* do seu repositório:
+
+&lt;img src="imgs/actions.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+O símbolo verde significa que o workflow foi bem sucedido, vermelho significa que foi gerado um erro em alguma etapa e amarelo significa que o workflow está em execução. Note que, mesmo se você já trabalhou diversas vezes com a ferramenta — como é o meu caso —, pode ser que você precise fazer tentativas e erros até ter um workflow totalmente funcional.
+
+
+---
+### Comentário
+
+É importante acompanhar, pelo menos ao realizar alterações no repositório e nas primeiras execuções agendadas, as etapas do workflow passo a passo. Em algumas situações pode ser que a etapa fique com o status de bem sucedida mas na verdade foi gerado algum erro que você precisará corrigir.
+
+Por exemplo, se você obtiver um erro na última etapa do workflow, ou seja, no momento de realizar o *commit* e *push* (linhas 47 a 53), informando algo como abaixo:
+
+&lt;img src="imgs/git.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+você precisará realizar uma configuração no seu repositório, permitindo que o workflow tenha poderes de ler *e* escrever no repositório.
+
+
+---
+### Comentário
+
+Na prática, basta seguir estes passos para solucionar o problema destacado:
+
+1. Clique na aba *Settings* do seu repositório;
+2. Na barra lateral esquerda, clique em *Actions* e depois em *General*;
+3. Garanta que em *Actions permissions* a opção *Allow all actions and reusable workflows* esteja marcada e que em *Workflow permissions* a opção *Read and write permissions* esteja marcada.
+4. Clique no botão *Save* para salvar as configurações.
+5. Clique na aba *Actions* do repositório e depois clique no último workflow executado;
+6. Clique no botão *Re-run all jobs* e depois clique em *Re-run jobs* na janela que se abre;
+
+Por fim, aguarde a execução novamente da rotina e acompanhe para verificar se o problema foi resolvido.
+
+Para outras, situações, que eventualmente podem ocorrer, leia as mensagens de aviso/erro. Geralmente, uma rápida procura no Google é suficiente para encontrar uma solução, mas se você tiver dificuldades contate o suporte da Análise Macro.
+
+
+
+---
+class: middle, inverse, center
+# GitHub Pages
+
+
+---
+### Criando o link para a dashboard
+
+Após ter corretamente configurado um workflow para automatizar o modelo e a renderização da dashboard através do GitHub Actions, chegou a hora de gerar um link navegável pela internet para a dashboard. Isso facilita o seu acesso aos resultados do modelo, além de ser uma forma de comunicação com usuários externos. 
+
+O link  pode ser gerado fácilmente através do recurso GitHub Pages, disponível na própria página do repositório no GitHub, sendo disponibilizado gratuitamente em repositórios públicos e com custos se o repositório for privado. Na prática, o que você deve fazer é:
+
+1. Clique na aba *Settings* do repositório;
+2. Na barra lateral esquerda, clique em *Pages*;
+3. Clique no botão *None* e selecione o *branch* com a opção `master` ou `main`;
+4. Clique no botão */(root)* e selecione a pasta */docs* ou o nome da pasta onde o arquivo `.html` da dashboard está salvo (seu nome deve ser `index.html`);
+5. Clique no botão *Save* para salvar a configuração.
+
+O resultado será a criação de um link personalizado do GitHub para acesso à dashboard. Aguarde alguns minutos e teste se o link funcionou. Dessa forma, fica fácil compartilhar a dashboard com outras pessoas.
+
+
+---
+### Referências
+
+Chegamos ao final desta aula. Estes links abaixo são boas fontes adicionais de informação:
+
+- [Happy Git and GitHub for the useR](https://happygitwithr.com/index.html)
+- [Conectando Git, Github e RStudio em 3 passos](https://analisemacro.com.br/data-science/conectando-git-github-e-rstudio-em-3-passos/)
+- [Cron Examples](https://crontab.guru/examples.html)
+- [Documentação do `{renv}`](https://rstudio.github.io/renv/articles/ci.html)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
