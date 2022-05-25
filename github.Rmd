@@ -51,7 +51,7 @@ Este é um tutorial para automatizar uma rotina de modelagem e previsão, tomand
 2. Atualização da dashboard de resultados;
 3. Hospedagem da dashboard e acesso por link de navegação.
 
-Você pode conferir o resultado final do tutorial [neste link da dashboard]() e [neste link do repositório no GitHub]().
+Você pode conferir o resultado final do tutorial [neste link da dashboard](https://analisemacropro.github.io/ipca/).
 
 Partiremos do que já foi exposto previamente no curso, ou seja, do código para implementar os modelos e a dashboard de resultados. O foco do tutorial será colocar esse código do modelo de previsão do IPCA em uma infraestrutura que permite automatizar a rotina.
 
