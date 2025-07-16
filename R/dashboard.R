@@ -876,7 +876,7 @@ plt_rmse <- acc_rmse %>%
     subtitle = "Modelos de previsão do IPCA",
     x        = "Horizonte (meses)",
     color    = NULL,
-    caption  = "**Elaboração:** analisemacro.com.br"
+    caption  = "**Elaboração:** FIESP"
     ) +
   ggplot2::theme(
     plot.title       = ggtext::element_markdown(size = 25, colour = colors[1]),
