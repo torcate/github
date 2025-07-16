@@ -787,7 +787,7 @@ plt_fanchart <- df_fanchart %>%
   ggplot2::geom_line(
     mapping = ggplot2::aes(y = ensemble),
     size    = 2,
-    color   = colors[1],
+    color   = colors[2],
     data    = dplyr::filter(df_fanchart, date >= max(df_ipca_lagged$date))
     ) +
   ggplot2::geom_vline(
@@ -810,7 +810,7 @@ plt_fanchart <- df_fanchart %>%
     title    = "**Fanchart**: Previsão do IPCA (% a.m.)",
     y        = "% a.m.",
     x        = NULL,
-    caption  = "**Dados:** BCB/Google/IBGE/IPEADATA | ** FIESP"
+    caption  = "**Dados:** BCB/Google/IBGE/IPEADATA | FIESP"
     ) +
   ggplot2::theme(
     plot.title       = ggtext::element_markdown(size = 25, colour = colors[1]),
