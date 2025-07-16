@@ -810,7 +810,7 @@ plt_fanchart <- df_fanchart %>%
     title    = "**Fanchart**: Previsão do IPCA (% a.m.)",
     y        = "% a.m.",
     x        = NULL,
-    caption  = "**Dados:** BCB/Google/IBGE/IPEADATA | **Elaboração:** analisemacro.com.br"
+    caption  = "**Dados:** BCB/Google/IBGE/IPEADATA | ** FIESP"
     ) +
   ggplot2::theme(
     plot.title       = ggtext::element_markdown(size = 25, colour = colors[1]),
